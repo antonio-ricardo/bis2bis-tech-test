@@ -1,0 +1,21 @@
+services:
+  db:
+    image: mongo:latest
+    restart: always
+    container_name: mongo_tech_test
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: antonio
+      MONGO_INITDB_ROOT_PASSWORD: 123
+    volumes:
+      - ./mongoData:/data/db
+    ports:
+      - 27017:27017
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+    environment:
+      REDIS_USER: antonio
+      REDIS_PASSWORD: 123
