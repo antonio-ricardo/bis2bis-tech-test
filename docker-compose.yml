@@ -1,4 +1,30 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_tech_test
+    environment:
+      ENVIRONMENT: development
+      PORT: 3000
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: 123
+      REDIS_USER: antonio
+      SECRET_EMAIL: bis.teste.tecnico@gmail.com
+      SECRET_PASSWORD: fnbexhappstnrkce
+      PRIVATE_KEY: private-antonio-key
+      REFRESH_PRIVATE_KEY: refresh-antonio-key
+      CHANGE_PASSWORD_KEY: bis-change-password-secret
+      MONGO_HOST: db
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app_network
+
   db:
     image: mongo:latest
     restart: always
@@ -10,6 +36,8 @@ services:
       - ./mongoData:/data/db
     ports:
       - 27017:27017
+    networks:
+      - app_network
 
   redis:
     image: redis:latest
@@ -19,3 +47,9 @@ services:
     environment:
       REDIS_USER: antonio
       REDIS_PASSWORD: 123
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

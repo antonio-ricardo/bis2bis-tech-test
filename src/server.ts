@@ -18,6 +18,8 @@ app.use('/users', userRoutes)
 
 app.use(errorHandler)
 app.listen(process.env.PORT || 3000, async () => {
-  await mongoose.connect('mongodb://antonio:123@localhost:27017')
+  await mongoose.connect(
+    `mongodb://antonio:123@${process.env.MONGO_HOST || 'localhost'}:27017`
+  )
   console.log(`Servido esta rodando na porta ${process.env.PORT || 3000}`)
 })
