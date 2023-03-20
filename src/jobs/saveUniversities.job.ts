@@ -84,6 +84,14 @@ saveUniversitiesQueu.process(async (job: Queue.Job<Data>, done) => {
 
     return done()
   } catch (err: any) {
+    await UniversitiesUpdateMongoModel.create({
+      run_with_success: false,
+      updateErrors: [
+        {
+          errorDescription: err,
+        },
+      ],
+    })
     done(new Error(err))
   }
 })
