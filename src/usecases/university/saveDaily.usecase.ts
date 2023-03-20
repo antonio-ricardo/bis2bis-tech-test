@@ -81,5 +81,18 @@ export const saveDailyUniversitiesUsecase = async () => {
     ...uruguayUniversitiesResponse.data,
   ]
 
-  saveUniversitiesQueu.add({ allUniversities })
+  const filteredUniversities = allUniversities.reduce((acc, university) => {
+    const { name, country, 'state-province': stateProvince } = university
+    const universityToNotRepeatInfo = `${name}-${country}-${stateProvince}`
+
+    if (!acc[universityToNotRepeatInfo]) {
+      acc[universityToNotRepeatInfo] = university
+    }
+
+    return acc
+  }, {} as any)
+
+  saveUniversitiesQueu.add({
+    allUniversities: Object.values(filteredUniversities),
+  })
 }

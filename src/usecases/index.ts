@@ -1,4 +1,9 @@
-export * from './university/saveDailyUniversities.usecase'
+export * from './university/saveDaily.usecase'
+export * from './university/list.usecase'
+export * from './university/getById.usecase'
+export * from './university/create.usecase'
+export * from './university/update.usecase'
+export * from './university/delete.usecase'
 
 export * from './user/create.usecase'
 export * from './user/login.usecase'

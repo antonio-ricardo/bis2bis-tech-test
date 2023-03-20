@@ -5,7 +5,7 @@ import { UniversitiesUpdateMongoModel } from '../mongoose/lastUpdate.model'
 
 const callUniversitiesRoute = () => {
   axios
-    .get(`http://localhost:${process.env.PORT || 3000}/universities`)
+    .get(`http://localhost:${process.env.PORT || 3000}/universities/save-daily`)
     .then(() => {
       logger.info(
         'Rota de salvamento de universidades diarias chamada com sucesso!'
